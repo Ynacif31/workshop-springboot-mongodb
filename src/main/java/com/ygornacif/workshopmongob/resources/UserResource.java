@@ -1,5 +1,6 @@
 package com.ygornacif.workshopmongob.resources;
 
+import com.ygornacif.workshopmongob.domain.Post;
 import com.ygornacif.workshopmongob.domain.User;
 import com.ygornacif.workshopmongob.dto.UserDTO;
 import com.ygornacif.workshopmongob.service.UserService;
@@ -54,5 +55,11 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    private ResponseEntity<List<Post>> findByPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
