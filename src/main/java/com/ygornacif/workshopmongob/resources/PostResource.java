@@ -3,6 +3,7 @@ package com.ygornacif.workshopmongob.resources;
 import com.ygornacif.workshopmongob.domain.Post;
 import com.ygornacif.workshopmongob.domain.User;
 import com.ygornacif.workshopmongob.dto.UserDTO;
+import com.ygornacif.workshopmongob.resources.util.URL;
 import com.ygornacif.workshopmongob.service.PostService;
 import com.ygornacif.workshopmongob.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,10 @@ public class PostResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/titlesearch")
+    private ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
 }
