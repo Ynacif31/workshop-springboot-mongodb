@@ -39,5 +39,5 @@ public class PostResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-    
+
 }
